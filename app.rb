@@ -6,8 +6,8 @@ require 'open-uri'
 require 'nokogiri'
 
 get'/' do #Home Page
-  "<form action='/result' method='post'>
-    <input type='text' name='txtUrl' required>
+  "<form action='/result' method='post'> 
+    Enter URL<input type='text' name='txtUrl' required>
     <input type='submit' value='Submit Url' name='btnClick'>
   </form>"
 end
@@ -20,7 +20,7 @@ def get_page(url)
   begin
     doc = Nokogiri::HTML(open(url))
   rescue
-     return "ERROR..Could not Fetch the URL"
+     return "<h1>Oops..Could not Fetch the URL</h1>"
   end
   links   = doc.xpath("//a").map{|link| link['href'].to_s+"<br>"}
   headers = doc.xpath("//h1","//h2").map{|header| header.to_s+"<br>"}
